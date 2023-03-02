@@ -65,4 +65,10 @@ class PagesController extends Controller
         return view('pages.blog')->with('blogTitle', $blogTitle);
     }
 
+        // myblog page
+        public function about(){
+        $aboutTitle = "About";
+            return view('pages.about')->with('aboutTitle', $aboutTitle);
+        }
+
 }

@@ -46,3 +46,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Routs for the Post controller
 Route::resource('posts','PostsController');
 
+//
+// Route::get('/posts', 'PostsController@store');
+

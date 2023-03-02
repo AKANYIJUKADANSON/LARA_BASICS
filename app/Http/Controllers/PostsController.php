@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
@@ -22,7 +23,7 @@ class PostsController extends Controller
 
         // Let's store all the post available in a variable and pass it to the index page and display it
         // The all() function is from models in this case the posts modl
-        
+
 
         // Using sql to fetch the data
         // $posts = DB::select('select * from posts ');
@@ -32,7 +33,7 @@ class PostsController extends Controller
 
 
         // =================Using eloquent
-        $posts = Post::all();
+        // $posts = Post::all();
 
         // ~~~~~~~~~if we want to load post following a certain order, use orderby
         // *********Eg as below orderBy latest post created using the data
@@ -48,8 +49,9 @@ class PostsController extends Controller
         // ~~~~~~~~Pagination
         // But here to load the pagination marks then we have to use the {{$posts->links()}} in the page
         //  wea we want to paginate in thc case index.blade.php
-        // $posts = Post::orderBy('posttitle', 'desc')->paginate(2);
-        return view('posts.index')->with('posts', $posts) ;
+
+        $posts = Post::orderBy('created_at', 'desc')->paginate(3);
+        return view('posts.index')->with('posts', $posts);
     }
 
     /**
@@ -59,7 +61,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        // adding a post
+        return view('posts.create');
     }
 
     /**
@@ -70,7 +73,23 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validating the request sent to this function
+        $this->validate($request, [
+            'posttitle' => 'required',
+            'postbody' => 'required'
+        ]);
+
+        // Creating or storing the data user enters
+        $post = new Post;
+        // Capturing data and pass it to the post class to store it
+        $post->posttitle = $request->input('posttitle');
+        $post->postbody = $request->input('postbody');
+
+        // Saving the poats created
+        $post->save();
+
+        // Redirecting the user to the posts list
+        return redirect('posts')->with('success', 'Post created successfully');
     }
 
     /**
@@ -86,7 +105,7 @@ class PostsController extends Controller
 
         // NOTE: that we are using eloquent
         // TO DO: more on eloquent 
-         $post = Post::find($id);
+        $post = Post::find($id);
         //Creating page for the single post
         return view('posts.show')->with('post', $post);
     }
@@ -99,7 +118,11 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // First find the post to edit specifying it with its id
+        $post = Post::find($id);
+
+        // Then send the postz data to the editing page
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -111,7 +134,23 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validating the request sent to this function
+        $this->validate($request, [
+            'posttitle' => 'required',
+            'postbody' => 'required'
+        ]);
+
+        // Find the post of specific id and update it with the data that is entered
+        $post = Post::find($id);
+        // Capturing data and pass it to the post class to store it
+        $post->posttitle = $request->input('posttitle');
+        $post->postbody = $request->input('postbody');
+
+        // Saving the poats created
+        $post->save();
+
+        // Redirecting the user to the posts list
+        return redirect('posts')->with('success', 'Post Updated successfully');
     }
 
     /**
@@ -122,6 +161,13 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Getting the post to delete using the specific id
+        $post = Post::find($id);
+
+        // Deleting the post using the delete() function
+        $post->delete();
+        // Redirecting to the posts page(posts.index)
+        return redirect('posts')->with('success', 'Post deleted successfully');
+
     }
 }

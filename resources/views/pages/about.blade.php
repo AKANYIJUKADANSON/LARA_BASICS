@@ -10,4 +10,22 @@
     <h1>{{$aboutTitle}}</h1>
     <h2>This is the about page</h2>
 
+
+    {!! Form::open(['route' => 'posts.store']) !!}
+    <div class="form-group">
+      {{ Form::label('Post Title')}}
+      {{-- syntax: $name, $value(could be empty), otherOptions like attributes of a field --}}
+      {{ Form::text('title', '', ['class'=>'form-control' , 'placeholder' => '']) }}
+    </div>
+
+    <div class="form-group">
+      {{ Form::label('Body')}}
+      {{ Form::textarea('body', '', ['id'=>'article-ckeditor','class' => 'form-control' , 'placeholder' => '']) }}
+    </div>
+
+    <div class="form-group">
+{{ Form::submit('Submit', ['class'=>'btn btn-small bg-warning text-white mt-4']) }}
+    </div>
+  {!! Form::close() !!}
+
 @endsection
