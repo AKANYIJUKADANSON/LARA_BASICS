@@ -15,7 +15,7 @@
     that is the $request and the $id parameters so we shall make an array of the route
     AND  the method should be PUT not post(remember by default its always post so we gat to change it) --}}
 
-  {!! Form::open(['route'=> ['posts.update', $post->id], 'method'=>'PUT']) !!}
+  {!! Form::open(['route'=> ['posts.update', $post->id], 'enctype'=>'multipart/form-data', 'method'=>'PUT']) !!}
     <div class="form-group">
       {{ Form::label('Post Title')}}
       {{-- syntax: $name, $value(could be empty), otherOptions like attributes of a field --}}
@@ -25,6 +25,11 @@
     <div class="form-group">
       {{ Form::label('Body')}}
       {{ Form::textarea('postbody', $post->postbody, ['id'=>'article-ckeditor','class' => 'form-control' , 'placeholder' => '']) }}
+    </div>
+
+    {{-- Image upload --}}
+    <div class="form-group mt-4">
+      {{ Form::file('thumb_nail')}}
     </div>
 
     <div class="form-group">

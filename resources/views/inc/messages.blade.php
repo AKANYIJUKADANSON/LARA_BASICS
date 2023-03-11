@@ -31,5 +31,4 @@
         <!-- Button to close/Dismiss the alert -->
         <button class="btn-close" type="button" aria-label="close" data-bs-dismiss="alert" ></button>
     </div>
-    
 @endif

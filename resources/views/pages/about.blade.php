@@ -11,10 +11,10 @@
     <h2>This is the about page</h2>
 
 
-    {!! Form::open(['route' => 'posts.store']) !!}
+    {{-- {!! Form::open(['route' => 'posts.store']) !!}
     <div class="form-group">
       {{ Form::label('Post Title')}}
-      {{-- syntax: $name, $value(could be empty), otherOptions like attributes of a field --}}
+      
       {{ Form::text('title', '', ['class'=>'form-control' , 'placeholder' => '']) }}
     </div>
 
@@ -26,6 +26,6 @@
     <div class="form-group">
 {{ Form::submit('Submit', ['class'=>'btn btn-small bg-warning text-white mt-4']) }}
     </div>
-  {!! Form::close() !!}
+  {!! Form::close() !!} --}}
 
 @endsection

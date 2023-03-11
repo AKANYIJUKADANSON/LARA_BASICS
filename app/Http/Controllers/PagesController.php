@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    /**
+     * This function below means that all the user will not access any page 
+     * controlled by this controller before the user authenticates
+     * 
+     * To make some pages exception, we an exception
+     */
+     
+    // public function __construct()
+    // {
+    //     $this->middleware('auth', ['except'=>['services']]);
+
+    // }
 
     // Index page
     public function index(){
