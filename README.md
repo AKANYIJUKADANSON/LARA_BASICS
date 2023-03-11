@@ -15,3 +15,8 @@
 7. CRUD -> posting, updating, deleting and geting posts
 8. Bootstrap integration in laravel
 9. Code organization
+
+## Other functionalities
+1. Uploading of files
+2. Deleting files
+3. Updating files
